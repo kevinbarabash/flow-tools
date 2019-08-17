@@ -1,6 +1,6 @@
 // @flow
-import * as b from "./builder";
-import * as AST from "./ast";
+import {builder as b} from "flow-ast";
+import * as AST from "flow-ast";
 
 function filter<T, P: $Pred<1>>(
     arr: Array<T>,
