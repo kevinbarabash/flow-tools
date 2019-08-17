@@ -1,7 +1,7 @@
 {
     "name": "flow-libdef",
     "version": "0.0.1",
-    "main": "index.js",
+    "main": "lib/index.js",
     "license": "MIT",
     "dependencies": {
         "flow-ast": "0.0.1"

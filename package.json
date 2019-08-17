@@ -15,6 +15,7 @@
     },
     "devDependencies": {
         "flow-bin": "^0.104.0",
+        "flow-build": "0.0.1",
         "jest": "^24.8.0",
         "nodemon": "^1.19.1",
         "pretty-quick": "^1.11.1",
