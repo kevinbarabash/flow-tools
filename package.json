@@ -1,0 +1,40 @@
+{
+    "name": "flow-tools",
+    "version": "0.0.1",
+    "main": "index.js",
+    "type": "module",
+    "author": "Kevin Barabash <kevinb7@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "dependencies": {
+        "flow-parser": "^0.104.0",
+        "prettier": "^1.18.2"
+    },
+    "devDependencies": {
+        "flow-bin": "^0.104.0",
+        "jest": "^24.8.0",
+        "nodemon": "^1.19.1",
+        "pretty-quick": "^1.11.1",
+        "sucrase": "^3.10.1"
+    },
+    "scripts": {
+        "flow": "flow",
+        "jest": "jest",
+        "pretty-quick": "pretty-quick"
+    },
+    "jest": {
+        "transform": {
+            "\\.(js)$": "<rootDir>/file-transformer.js"
+        },
+        "testPathIgnorePatterns": [
+            "/node_modules/",
+            "/lib/"
+        ],
+        "watchPathIgnorePatterns": [
+            "/lib/"
+        ]
+    }
+}

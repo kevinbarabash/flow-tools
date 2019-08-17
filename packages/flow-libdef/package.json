@@ -1,0 +1,9 @@
+{
+    "name": "flow-libdef",
+    "version": "0.0.1",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "watch": "nodemon --watch src --exec 'sucrase --out-dir lib --transforms flow,imports src'"
+    }
+}
