@@ -1,6 +1,7 @@
 // @flow
 import path from "path";
 import fs from "fs";
+import {promisify} from "util";
 import {transform} from "sucrase";
 import chokidar from "chokidar";
 import glob from "glob";
@@ -63,38 +64,43 @@ export function watch() {
     // - use .bin to chmod appropriate files
     const watcher = chokidar.watch("packages/*/src/**/*.js");
 
-    watcher.on("add", path => {
-        fs.readFile(path, "utf-8", (err, data) => {
-            if (err) {
-                console.warn(err);
-                return;
-            }
-            const code = transform(data, compilerOptions);
+    const readFile = promisify(fs.readFile);
+    const writeFile = promisify(fs.writeFile);
+    const exists = promisify(fs.exists);
+
+    watcher.on("add", async inputPath => {
+        try {
+            const data = await readFile(inputPath, "utf-8");
+            
+            const {code} = transform(data, compilerOptions);
             // TODO: make sure this package/flow-*/src => package/flow-*/lib
-            fs.writeFile(path.replace("/src/", "/lib/"), code, "utf-8", (err) => {
-                // TODO: check if enclosing dir exists
-                if (err) {
-                    console.warn(err);
-                }
-                console.log(`added: ${path}`);
-            });
-        });
+            const outputPath = inputPath.replace("/src/", "/lib/");
+
+            if (!await exists(path.dirname(outputPath))) {
+                mkdirp.sync(path.dirname(outputPath));
+            }
+
+            await writeFile(outputPath, code, "utf-8");
+
+            console.log(`added ${outputPath}`);
+        } catch (e) {
+            console.warn(e);
+        }
     });
-    watcher.on("change", path => {
-        fs.readFile(path, "utf-8", (err, data) => {
-            if (err) {
-                console.warn(err);
-                return;
-            }
-            const code = transform(data, compilerOptions);
+    watcher.on("change", async inputPath => {
+        try {
+            const data = await readFile(inputPath, "utf-8");
+            
+            const {code} = transform(data, compilerOptions);
             // TODO: make sure this package/flow-*/src => package/flow-*/lib
-            fs.writeFile(path.replace("/src/", "/lib/"), code, "utf-8", (err) => {
-                if (err) {
-                    console.warn(err);
-                }
-                console.log(`changed: ${path}`);
-            });
-        });
+            const outputPath = inputPath.replace("/src/", "/lib/");
+
+            await writeFile(outputPath, code, "utf-8");
+
+            console.log(`changed ${outputPath}`);
+        } catch (e) {
+            console.warn(e);
+        }
     });
     watcher.on("unlink", path => {
         // TODO: make sure this package/flow-*/src => package/flow-*/lib

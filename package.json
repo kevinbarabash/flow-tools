@@ -24,7 +24,9 @@
     "scripts": {
         "flow": "flow",
         "jest": "jest",
-        "pretty-quick": "pretty-quick"
+        "pretty-quick": "pretty-quick",
+        "build": "flow-build",
+        "watch": "flow-build -w"
     },
     "jest": {
         "transform": {

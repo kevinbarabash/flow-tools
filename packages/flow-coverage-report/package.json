@@ -1,0 +1,14 @@
+{
+  "name": "flow-coverage-report",
+  "version": "0.0.1",
+  "main": "./lib/index.js",
+  "license": "MIT",
+  "bin": {
+    "flow-coverage-report": "./lib/cli.js"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.5.5",
+    "@babel/traverse": "^7.5.5",
+    "match-all": "^1.2.5"
+  }
+}

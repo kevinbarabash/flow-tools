@@ -2590,6 +2590,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+match-all@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/match-all/-/match-all-1.2.5.tgz#f709af311a7cb9ae464d9107a4f0fe08d3326eff"
+  integrity sha512-KW4trRDMYbVkAKZ1J655vh0931mk3XM1lIJ480TXUL3KBrOsZ6WpryYJELonvtXC1O4erLYB069uHidLkswbjQ==
+
 mem@^4.0.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/mem/-/mem-4.3.0.tgz#461af497bc4ae09608cdb2e60eefb69bff744178"
