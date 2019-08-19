@@ -35,10 +35,10 @@ const App = () => {
                         {name: "path", align: "left"},
                         {name: "covered", align: "right"},
                         {name: "total", align: "right"},
-                        {name: "percent", align: "right"},
+                        {name: "percent", align: "right", format: (value: number) => value.toFixed(0)},
                     ]} 
                     data={(Object.entries(report.dirs): any).map(([path, {covered, total}]) => {
-                        const percent = (100 * covered / total).toFixed(0) + "%";
+                        const percent = (100 * covered / total);
                         return {
                             path,
                             covered,
@@ -56,17 +56,20 @@ const App = () => {
                         {name: "path", align: "left"},
                         {name: "covered", align: "right"},
                         {name: "total", align: "right"},
-                        {name: "percent", align: "right"},
+                        {name: "percent", align: "right", format: (value: number) => value.toFixed(0)},
                     ]} 
-                    data={(Object.entries(report.files): any).map(([path, {covered, total}]) => {
-                        const percent = (100 * covered / total).toFixed(0) + "%";
-                        return {
-                            path,
-                            covered,
-                            total,
-                            percent,
-                        };
-                    })}
+                    data={(Object.entries(report.files): any)
+                        .filter(([path, {covered, total}]) => total !== 0)
+                        .map(([path, {covered, total}]) => {
+                            const percent = (100 * covered / total);
+                            return {
+                                path,
+                                covered,
+                                total,
+                                percent,
+                            };
+                        })
+                    }
                 />
             </VStack>
         </HStack>

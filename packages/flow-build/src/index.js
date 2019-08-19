@@ -8,7 +8,7 @@ import glob from "glob";
 import rimraf from "rimraf";
 import mkdirp from "mkdirp";
 
-const compilerOptions = {transforms: ["flow", "imports"]};
+const compilerOptions = {transforms: ["flow", "imports", "jsx"]};
 
 export function build() {
     const packageRoots = glob.sync("packages/*");
