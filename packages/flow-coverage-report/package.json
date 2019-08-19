@@ -9,6 +9,10 @@
   "dependencies": {
     "@babel/parser": "^7.5.5",
     "@babel/traverse": "^7.5.5",
-    "match-all": "^1.2.5"
+    "express": "^4.17.1",
+    "match-all": "^1.2.5",
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   }
 }
